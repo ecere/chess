@@ -1,0 +1,70 @@
+{
+   "Version" : 0.2,
+   "ModuleName" : "chess",
+   "Options" : {
+      "TargetType" : "Executable",
+      "TargetFileName" : "chess",
+      "Libraries" : [
+         "ecere"
+      ]
+   },
+   "Configurations" : [
+      {
+         "Name" : "Debug",
+         "Options" : {
+            "Debug" : true,
+            "Console" : true
+         }
+      },
+      {
+         "Name" : "Release",
+         "Options" : {
+            "Optimization" : "Speed"
+         }
+      },
+      {
+         "Name" : "MemoryGuard",
+         "Options" : {
+            "Debug" : true,
+            "MemoryGuard" : true,
+            "Console" : true
+         }
+      }
+   ],
+   "Files" : [
+      {
+         "Folder" : "src",
+         "Files" : [
+            "about.ec",
+            "ai.ec",
+            "chess.ec",
+            "chess2D.ec",
+            "chess3D.ec",
+            "chessutils.ec",
+            "connect.ec",
+            "promotion.ec"
+         ]
+      }
+   ],
+   "ResourcesPath" : "res",
+   "Resources" : [
+      "aboutPic.jpg",
+      "blackBishop.png",
+      "blackKing.png",
+      "blackKnight.png",
+      "blackPawn.png",
+      "blackQueen.png",
+      "blackRook.png",
+      "board.jpg",
+      "bthr.jpg",
+      "darkwood.jpg",
+      "lightwo1.jpg",
+      "whiteBishop.png",
+      "whiteKing.png",
+      "whiteKnight.png",
+      "whitePawn.png",
+      "whiteQueen.png",
+      "whiteRook.png",
+      "chessSet.3ds"
+   ]
+}

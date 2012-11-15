@@ -1,6 +1,6 @@
 {
    "Version" : 0.2,
-   "ModuleName" : "chess",
+   "ModuleName" : "Chess",
    "Options" : {
       "TargetType" : "Executable",
       "TargetFileName" : "chess",
@@ -29,6 +29,25 @@
             "MemoryGuard" : true,
             "Console" : true
          }
+      },
+      {
+         "Name" : "Android",
+         "Options" : {
+            "Debug" : true,
+            "TargetType" : "SharedLibrary",
+            "TargetFileName" : "Chess",
+            "PostbuildCommands" : [
+               "$(call mkdirq,$(OBJ)apk/lib/x86)",
+               "$(call mkdirq,$(OBJ)apk/lib/armeabi)",
+               "$(call cpq,/sdk/ecere/obj/android.linux.$(COMPILER)/libecere.so,$(OBJ)apk/lib/x86)",
+               "$(call cpq,$(TARGET),$(OBJ)apk/lib/x86)",
+               "aapt package -v -f -m -M android/AndroidManifest.xml -F $(OBJ)$(MODULE)-unsigned.apk -I C:/android-sdk/platforms/android-16/android.jar -S android/res $(OBJ)apk",
+               "jarsigner -storepass mypassword -sigalg MD5withRSA -digestalg SHA1 $(OBJ)$(MODULE)-unsigned.apk mykey -signedjar $(OBJ)$(MODULE).apk",
+               "adb uninstall com.ecere.$(MODULE)",
+               "adb install $(OBJ)$(MODULE).apk",
+               "adb shell am start -a android.intent.action.MAIN -n com.ecere.$(MODULE)/android.app.NativeActivity"
+            ]
+         }
       }
    ],
    "Files" : [
@@ -43,6 +62,40 @@
             "chessutils.ec",
             "connect.ec",
             "promotion.ec"
+         ]
+      },
+      {
+         "Folder" : "android",
+         "Files" : [
+            {
+               "Folder" : "res",
+               "Files" : [
+                  {
+                     "Folder" : "drawable",
+                     "Files" : [
+                        {
+                           "FileName" : "icon.png",
+                           "Options" : {
+                              "ExcludeFromBuild" : true
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     "Folder" : "drawable-xhdpi",
+                     "Files" : [
+                        "icon.png"
+                     ]
+                  },
+                  {
+                     "Folder" : "values",
+                     "Files" : [
+                        "strings.xml"
+                     ]
+                  }
+               ]
+            },
+            "AndroidManifest.xml"
          ]
       }
    ],

@@ -41,11 +41,11 @@ ChessApp app;
 class ChessApp : GuiApplication
 {
    appName = APPNAME;
-#if defined(__WIN32__)
+/*#if defined(__WIN32__)
    driver = "Direct3D";
-#else
+#else*/
    driver = "OpenGL";
-#endif
+//#endif
    Chess{};
 
    void Main()
@@ -55,11 +55,22 @@ class ChessApp : GuiApplication
    }
 }
 
+#ifdef HIGH_DPI
+define stateWidth = 300;
+define turnWidth = 150;
+#else
+define stateWidth = 200;
+define turnWidth = 100;
+#endif
+
 class Chess : Window
 {
    background = gray, hasMenuBar = true, hasStatusBar = true,
-   text = APPNAME, hasClose = true, hasMaximize = true, hasMinimize = true,
-   borderStyle = sizable, hasClose = true, 
+   text = APPNAME,
+#ifndef __ANDROID__
+   hasClose = true, hasMaximize = true, hasMinimize = true,
+   borderStyle = sizable,
+#endif
    anchor = Anchor { left = 0, top = 0, right = 0, bottom = 0 };
 
    bool hosting, local, ai;
@@ -71,8 +82,8 @@ class Chess : Window
 
    ChessState chessState;
    
-   StatusField stateField { statusBar, width = 200 };
-   StatusField turnField { statusBar, width = 100 };
+   StatusField stateField { statusBar, width = stateWidth};
+   StatusField turnField { statusBar, width = turnWidth };
 
    property ChessState * chessState { get { return &chessState; } }
 

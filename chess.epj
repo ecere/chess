@@ -33,9 +33,13 @@
       {
          "Name" : "Android",
          "Options" : {
-            "Debug" : true,
+            "Optimization" : "Speed",
+            "PreprocessorDefinitions" : [
+               "HIGH_DPI"
+            ],
             "TargetType" : "SharedLibrary",
             "TargetFileName" : "Chess",
+            "FastMath" : true,
             "PostbuildCommands" : [
                "$(call mkdirq,$(OBJ)apk/lib/x86)",
                "$(call mkdirq,$(OBJ)apk/lib/armeabi)",
